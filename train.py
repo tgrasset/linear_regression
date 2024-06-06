@@ -3,18 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sys import argv
 
-def calculateCost(estimate, prices):
-    """
-    Mean Squared Error:
-    To get a good idea of how close we are to the dataset, we take the square of
-    the difference between the real price and the estimate price with the current
-    parameters and get the average value which will be the "cost" for the current
-    parameters
-    """
-    m = len(prices)
-    cost = (1 / (2*m)) * np.sum((estimate - prices)**2)
-    return cost
-
 def tryParams(km, tmp0, tmp1):
     """
     This function applies the current parameters to all the mileage data items and
@@ -40,19 +28,17 @@ def linearRegression(normKm, prices, kmMean, kmStd):
     """
     tmp0 = 0
     tmp1 = 0
-    epochs = 10000
-    learningRate = 0.001
-    costs = []
+    epochs = 100
+    learningRate = 0.1
     x = np.linspace(min(normKm), max(normKm), 100)
 
     for i in range(epochs):
         estimate = tryParams(normKm, tmp0, tmp1)
-        costs.append(calculateCost(estimate, prices))
+        # if i % 5 == 0:
+        #     deNormX = x * kmStd + kmMean
+        #     y = tmp0 + tmp1 * x
+        #     plt.plot(deNormX, y, label=f'Epoch {i}')
         tmp0, tmp1 = updateParams(estimate, normKm, prices, tmp0, tmp1, learningRate)
-        if i % 500 == 0:
-            deNormX = x * kmStd + kmMean
-            y = tmp0 + tmp1 * x
-            plt.plot(deNormX, y, label=f'Epoch {i}')
     deNormX = x * kmStd + kmMean
     y = tmp0 + tmp1 * x
     plt.plot(deNormX, y, 'r', label='Final Regression Line')
@@ -99,16 +85,12 @@ def main():
             "theta1": [theta1]
         })
         df.to_csv("thetas.csv", index=False)
-        print("Final theta values saved to thetas.csv")
+        print("Values saved in thetas.csv")
         plt.scatter(km, prices)
         plt.show()
         return 0
     
-    except AssertionError as err:
-        print("Error: ", err)
-        return 1
-
-    except Exception as err:
+    except (AssertionError, Exception) as err:
         print("Error: ", err)
         return 1
 

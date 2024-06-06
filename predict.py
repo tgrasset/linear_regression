@@ -30,10 +30,11 @@ def main():
             except ValueError:
                 print("Invalid input. Please enter a valid float.")
         print("Estimated selling price for a car with a mileage of ", value, " km : ", theta0 + value * theta1)
-    except AssertionError as err:
+        return 0
+    
+    except (AssertionError, Exception) as err:
         print("Error: ", err)
-    except Exception as err:
-        print("Error: ", err)
+        return 1
         
 if __name__ == "__main__":
     main()

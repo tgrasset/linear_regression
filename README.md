@@ -11,7 +11,7 @@ This particular example is very simple since it only features one independant va
 
 ### train.py
 The train.py script takes the data.csv as input, which contains data about selling prices of cars depending on their mileage in kilometers.   
-This data is used to do the training and find the best parameters for our model, using a gradient descent algorithm to update our two parameters theta0 and theta1 until the mean squared error is close enough to a minimum. The following picture represents a few of the different tries made by the algorithm, starting from theta0 = 0 and theta1 = 0 (Epoch 0) to values that get closer and closer to a minimum cost (Epoch 10000).
+This data is used to do the training and find the best parameters for our model, using a gradient descent algorithm to update our two parameters theta0 and theta1 until the mean squared error is close enough to a minimum. The following picture represents a few of the different tries made by the algorithm, starting from theta0 = 0 and theta1 = 0 (Epoch 0) to values that get closer and closer to a minimum cost (Epoch 100).
 
 ![Linear Regression](images/multiple_lines.png)
 
