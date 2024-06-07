@@ -24,7 +24,7 @@ def updateParams(estimate, km, prices, tmp0, tmp1, learningRate):
 def linearRegression(normKm, prices, kmMean, kmStd):
     """
     This function implements the gradient descent algorithm to find the best
-    parameters for our model, updating the two arguments given to it 10000 times
+    parameters for our model, updating the two arguments given to it many times
     """
     tmp0 = 0
     tmp1 = 0
